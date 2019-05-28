@@ -1,0 +1,66 @@
+﻿@model adminlte.Models.SimpananModel
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Form Tambah Simpanan
+            <small>Koperasi Simpan Pinjam</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-database"></i> Data Master</a></li>
+            <li class="active">Form Simpanan</li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <!-- SELECT2 EXAMPLE -->
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="box box-default">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Tambah Data</h3>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-8">
+
+                            @Html.ValidationSummary(true, "", new { @class = "help - block" })
+                            <div class="form-group">
+                                <label>Jenis Simpanan</label>
+                                @Html.EditorFor(model => model.jns_simp, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.jns_simp, "", new { @class = "help-block" })
+                            </div>
+                            <!-- /.form-group -->
+
+                            <div class="form-group">
+                                <div class="col-md-10">
+                                    <input type="submit" value="Tambah" class="btn btn-primary" />
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.box-body -->
+
+            </div>
+        <!-- /.box -->
+        }
+    </section>
+
+</div>

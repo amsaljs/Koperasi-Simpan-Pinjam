@@ -1,0 +1,300 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="KoperasiModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="akun">
+          <Key>
+            <PropertyRef Name="id_akun" />
+          </Key>
+          <Property Name="id_akun" Type="int" Nullable="false" />
+          <Property Name="nama_akun" Type="varchar" MaxLength="50" />
+          <Property Name="email" Type="varchar" MaxLength="50" />
+          <Property Name="password" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="anggota">
+          <Key>
+            <PropertyRef Name="no_anggota" />
+          </Key>
+          <Property Name="no_anggota" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="nama_ang" Type="varchar" MaxLength="50" />
+          <Property Name="alamat" Type="varchar" MaxLength="50" />
+          <Property Name="kota" Type="varchar" MaxLength="50" />
+          <Property Name="no_telp" Type="varchar" MaxLength="50" />
+          <Property Name="pekerjaan" Type="varchar" MaxLength="50" />
+          <Property Name="no_simp" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="detail_simpanan">
+          <Key>
+            <PropertyRef Name="no_simpan" />
+          </Key>
+          <Property Name="no_simpan" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="no_ang" Type="varchar" MaxLength="50" />
+          <Property Name="debet" Type="float" />
+          <Property Name="kredit" Type="float" />
+          <Property Name="saldo" Type="float" />
+        </EntityType>
+        <EntityType Name="pinjaman">
+          <Key>
+            <PropertyRef Name="kd_pinj" />
+          </Key>
+          <Property Name="kd_pinj" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="jns_pinj" Type="varchar" MaxLength="50" />
+          <Property Name="max_pinj" Type="float" />
+          <Property Name="max_ang" Type="float" />
+          <Property Name="bunga" Type="float" />
+        </EntityType>
+        <EntityType Name="simpanan">
+          <Key>
+            <PropertyRef Name="kd_simp" />
+          </Key>
+          <Property Name="kd_simp" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="jns_simp" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="trans_pinjaman">
+          <Key>
+            <PropertyRef Name="no_pinj" />
+          </Key>
+          <Property Name="no_pinj" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tglpinj" Type="date" />
+          <Property Name="bunga" Type="float" />
+          <Property Name="jlh" Type="float" />
+          <Property Name="total" Type="float" />
+          <Property Name="angsuran" Type="float" />
+          <Property Name="status" Type="varchar" MaxLength="50" />
+          <Property Name="kd_pinj" Type="varchar" MaxLength="50" />
+          <Property Name="no_ang" Type="varchar" MaxLength="50" />
+          <Property Name="keterangan" Type="varchar" MaxLength="50" />
+          <Property Name="lama" Type="float" />
+        </EntityType>
+        <EntityType Name="trans_simpanan">
+          <Key>
+            <PropertyRef Name="id_tsimpan" />
+          </Key>
+          <Property Name="id_tsimpan" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="no_simpan" Type="varchar" MaxLength="50" />
+          <Property Name="tglsimpan" Type="datetime" />
+          <Property Name="jenis" Type="varchar" MaxLength="50" />
+          <Property Name="saldo" Type="float" />
+          <Property Name="no_ang" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'Koperasi.dbo.view_simpanan' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="view_simpanan">
+          <Property Name="debet" Type="float" />
+          <Property Name="no_ang" Type="varchar" MaxLength="50" />
+          <Property Name="kredit" Type="float" />
+          <Property Name="saldo" Type="float" />
+        </EntityType>-->
+        <EntityContainer Name="KoperasiModelStoreContainer">
+          <EntitySet Name="akun" EntityType="Self.akun" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="anggota" EntityType="Self.anggota" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="detail_simpanan" EntityType="Self.detail_simpanan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="pinjaman" EntityType="Self.pinjaman" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="simpanan" EntityType="Self.simpanan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="trans_pinjaman" EntityType="Self.trans_pinjaman" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="trans_simpanan" EntityType="Self.trans_simpanan" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="KoperasiModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="akun">
+          <Key>
+            <PropertyRef Name="id_akun" />
+          </Key>
+          <Property Name="id_akun" Type="Int32" Nullable="false" />
+          <Property Name="nama_akun" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="anggota">
+          <Key>
+            <PropertyRef Name="no_anggota" />
+          </Key>
+          <Property Name="no_anggota" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nama_ang" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="alamat" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="kota" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="no_telp" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pekerjaan" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="no_simp" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="detail_simpanan">
+          <Key>
+            <PropertyRef Name="no_simpan" />
+          </Key>
+          <Property Name="no_simpan" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="no_ang" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="debet" Type="Double" />
+          <Property Name="kredit" Type="Double" />
+          <Property Name="saldo" Type="Double" />
+        </EntityType>
+        <EntityType Name="pinjaman">
+          <Key>
+            <PropertyRef Name="kd_pinj" />
+          </Key>
+          <Property Name="kd_pinj" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="jns_pinj" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="max_pinj" Type="Double" />
+          <Property Name="max_ang" Type="Double" />
+          <Property Name="bunga" Type="Double" />
+        </EntityType>
+        <EntityType Name="simpanan">
+          <Key>
+            <PropertyRef Name="kd_simp" />
+          </Key>
+          <Property Name="kd_simp" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="jns_simp" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="trans_pinjaman">
+          <Key>
+            <PropertyRef Name="no_pinj" />
+          </Key>
+          <Property Name="no_pinj" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tglpinj" Type="DateTime" Precision="0" />
+          <Property Name="bunga" Type="Double" />
+          <Property Name="jlh" Type="Double" />
+          <Property Name="total" Type="Double" />
+          <Property Name="angsuran" Type="Double" />
+          <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="kd_pinj" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="no_ang" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="keterangan" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="lama" Type="Double" />
+        </EntityType>
+        <EntityType Name="trans_simpanan">
+          <Key>
+            <PropertyRef Name="id_tsimpan" />
+          </Key>
+          <Property Name="id_tsimpan" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="no_simpan" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="tglsimpan" Type="DateTime" Precision="3" />
+          <Property Name="jenis" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="saldo" Type="Double" />
+          <Property Name="no_ang" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="KoperasiEntities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="akuns" EntityType="Self.akun" />
+          <EntitySet Name="anggotas" EntityType="Self.anggota" />
+          <EntitySet Name="detail_simpanan" EntityType="Self.detail_simpanan" />
+          <EntitySet Name="pinjamen" EntityType="Self.pinjaman" />
+          <EntitySet Name="simpanans" EntityType="Self.simpanan" />
+          <EntitySet Name="trans_pinjaman" EntityType="Self.trans_pinjaman" />
+          <EntitySet Name="trans_simpanan" EntityType="Self.trans_simpanan" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="KoperasiModelStoreContainer" CdmEntityContainer="KoperasiEntities2">
+          <EntitySetMapping Name="akuns">
+            <EntityTypeMapping TypeName="KoperasiModel.akun">
+              <MappingFragment StoreEntitySet="akun">
+                <ScalarProperty Name="id_akun" ColumnName="id_akun" />
+                <ScalarProperty Name="nama_akun" ColumnName="nama_akun" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="password" ColumnName="password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="anggotas">
+            <EntityTypeMapping TypeName="KoperasiModel.anggota">
+              <MappingFragment StoreEntitySet="anggota">
+                <ScalarProperty Name="no_anggota" ColumnName="no_anggota" />
+                <ScalarProperty Name="nama_ang" ColumnName="nama_ang" />
+                <ScalarProperty Name="alamat" ColumnName="alamat" />
+                <ScalarProperty Name="kota" ColumnName="kota" />
+                <ScalarProperty Name="no_telp" ColumnName="no_telp" />
+                <ScalarProperty Name="pekerjaan" ColumnName="pekerjaan" />
+                <ScalarProperty Name="no_simp" ColumnName="no_simp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="detail_simpanan">
+            <EntityTypeMapping TypeName="KoperasiModel.detail_simpanan">
+              <MappingFragment StoreEntitySet="detail_simpanan">
+                <ScalarProperty Name="no_simpan" ColumnName="no_simpan" />
+                <ScalarProperty Name="no_ang" ColumnName="no_ang" />
+                <ScalarProperty Name="debet" ColumnName="debet" />
+                <ScalarProperty Name="kredit" ColumnName="kredit" />
+                <ScalarProperty Name="saldo" ColumnName="saldo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pinjamen">
+            <EntityTypeMapping TypeName="KoperasiModel.pinjaman">
+              <MappingFragment StoreEntitySet="pinjaman">
+                <ScalarProperty Name="kd_pinj" ColumnName="kd_pinj" />
+                <ScalarProperty Name="jns_pinj" ColumnName="jns_pinj" />
+                <ScalarProperty Name="max_pinj" ColumnName="max_pinj" />
+                <ScalarProperty Name="max_ang" ColumnName="max_ang" />
+                <ScalarProperty Name="bunga" ColumnName="bunga" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="simpanans">
+            <EntityTypeMapping TypeName="KoperasiModel.simpanan">
+              <MappingFragment StoreEntitySet="simpanan">
+                <ScalarProperty Name="kd_simp" ColumnName="kd_simp" />
+                <ScalarProperty Name="jns_simp" ColumnName="jns_simp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="trans_pinjaman">
+            <EntityTypeMapping TypeName="KoperasiModel.trans_pinjaman">
+              <MappingFragment StoreEntitySet="trans_pinjaman">
+                <ScalarProperty Name="no_pinj" ColumnName="no_pinj" />
+                <ScalarProperty Name="tglpinj" ColumnName="tglpinj" />
+                <ScalarProperty Name="bunga" ColumnName="bunga" />
+                <ScalarProperty Name="jlh" ColumnName="jlh" />
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="angsuran" ColumnName="angsuran" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="kd_pinj" ColumnName="kd_pinj" />
+                <ScalarProperty Name="no_ang" ColumnName="no_ang" />
+                <ScalarProperty Name="keterangan" ColumnName="keterangan" />
+                <ScalarProperty Name="lama" ColumnName="lama" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="trans_simpanan">
+            <EntityTypeMapping TypeName="KoperasiModel.trans_simpanan">
+              <MappingFragment StoreEntitySet="trans_simpanan">
+                <ScalarProperty Name="id_tsimpan" ColumnName="id_tsimpan" />
+                <ScalarProperty Name="no_simpan" ColumnName="no_simpan" />
+                <ScalarProperty Name="tglsimpan" ColumnName="tglsimpan" />
+                <ScalarProperty Name="jenis" ColumnName="jenis" />
+                <ScalarProperty Name="saldo" ColumnName="saldo" />
+                <ScalarProperty Name="no_ang" ColumnName="no_ang" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

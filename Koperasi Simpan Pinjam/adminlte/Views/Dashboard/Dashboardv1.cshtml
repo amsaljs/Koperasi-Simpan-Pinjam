@@ -1,0 +1,197 @@
+﻿@model adminlte.Models.Chart
+@{
+    ViewBag.Title = "Dashboardv1";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script line="javascript">
+   		    var anggotadata =[]
+   		    var pekerjaandata = []
+   		    var totals = []
+            var tanggals = []
+</script>
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Dashboard
+            <small>Control panel</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Dashboard</li>
+        </ol>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <!-- Small boxes (Stat box) -->
+        <div class="row">
+            <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-aqua">
+                    <div class="inner">
+                        <h3>@Model.dataTable1.Rows[0][0]</h3>
+                        <p>Anggota</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-person-add"></i>
+                    </div>
+                    <a href="@Url.Action("Index", "Anggota")" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-green">
+                    <div class="inner">
+                        <h3 style="text-align:right">Rp.@Model.dataTable1.Rows[0][1]</h3>
+                        <p>Kredit</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-minus"></i>
+                    </div>
+                    <a href="@Url.Action("Index", "TransaksiPinjaman")" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-yellow">
+                    <div class="inner">
+                        <h3 style="text-align:right">RP.@Model.dataTable1.Rows[0][2]</h3>
+                        <p>Debet</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-ios-plus"></i>
+                    </div>
+                    <a href="@Url.Action("Index", "TransaksiSimpanan")" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-red">
+                    <div class="inner">
+                        <h3 style="text-align:right">Rp.@Model.dataTable1.Rows[0][3]</h3>
+                        <p>Saldo</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-money"></i>
+                    </div>
+                    <a href="@Url.Action("DSimpan", "TransaksiSimpanan")" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+            <!-- ./col -->
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-md-6">
+                <!-- AREA CHART -->
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Grafik Anggota Koperasi</h3>
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="chart">
+                            <canvas id="pie-chart" style="height:3px" ></canvas>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+
+            <div class="col-md-6">
+                <!-- AREA CHART -->
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Grafik Transaksi Simpanan</h3>
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="chart">
+                            <canvas id="bar-chart-grouped" style="height:3px"></canvas>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+        </div><!--/.row-->
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+@section Scripts
+{
+
+    <script inline="javascript">
+        for(var i = 0; i<@Model.dataTable4.Rows.Count; i++){
+
+            var a = [[Model.dataTable4.Rows[i][0]]];
+            var b = [[Model.dataTable4.Rows[i][1]]];
+
+            anggotadata.push(a);
+            pekerjaandata.push(b);
+        }
+
+    </script>
+
+    @Scripts.Render("~/bundles/dashboard1")
+    <script src="~/Scripts/adminlte/js/pages/chart.js"></script>
+    <script type="text/javascript">
+
+        new Chart(document.getElementById("pie-chart"), {
+            type: 'pie',
+            data: {
+                labels: ["Mahasiswa", "Dosen", "Pengusaha"],
+                datasets: [{
+                    label: "Jumlah",
+                    backgroundColor: ["#3E95CD","#E8C3B9","#8e5ea2","#E8C3B9","#E8C3B9","#E8C3B9","#E8C3B9","#E8C3B9"],
+                    data: [3,2,1]
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: 'Data statistik berdasarkan jenis pekerjaan'
+                }
+            }
+        });
+
+
+        new Chart(document.getElementById("bar-chart-grouped"), {
+            type: 'bar',
+            data: {
+                labels: ["04 May 2019", "04 May 2019"],
+                datasets: [
+                  {
+                      label: "Jumlah simpanan",
+                      backgroundColor: ["#3e95cd","#E8C3B9"],
+                      data: [12000,120000]
+                  }
+                ]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: 'Grafik Transaksi Simpanan'
+                }
+            }
+        });
+
+
+    </script>
+}

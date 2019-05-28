@@ -1,0 +1,123 @@
+﻿@model adminlte.Models.TransaksiPinjamanModel
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Form Tambah Transaksi Pinjaman
+            <small>Koperasi</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="#">Pinjam</a></li>
+            <li class="active">Form Transaksi Pinjaman</li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <!-- SELECT2 EXAMPLE -->
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="box box-default">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Tambah Data</h3>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-8">
+
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            @Html.HiddenFor(model => model.no_pinj)
+
+                            <div class="form-group">
+                                <label>Nama Anggota</label>
+                                @Html.DropDownListFor(model => model.no_ang, ViewBag.anggotaList as SelectList, "--Pilih Anggota--", new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.no_ang, "", new { @class = "text-danger" })
+                            </div>
+                            <!-- /.form-group -->
+                            <div class="form-group">
+                                <label>Tanggal Pinjam</label>
+                                <div class="input-group date">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    @Html.EditorFor(model => model.tglpinj, new { htmlAttributes = new { @class = "form-control pull-right", @id = "datepicker", @type = "text" } })
+                                    @Html.ValidationMessageFor(model => model.tglpinj, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <!-- /.form-group -->
+                            <!-- /.form-group -->
+                            <div class="form-group">
+                                <label>Jenis Pinjaman</label>
+                                @Html.DropDownListFor(model => model.kd_pinj, ViewBag.pinjamanList as SelectList, "--Jenis Pinjaman--", new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.kd_pinj, "", new { @class = "text-danger" })
+                            </div>
+                            <!-- /.form-group -->
+                            <!-- /.form-group -->
+                            <div class="form-group">
+                                <label>Jumlah Peminjaman</label>
+                                @Html.EditorFor(model => model.jlh, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.jlh, "", new { @class = "text-danger" })
+                            </div>
+                            <!-- /.form-group -->
+                            <!-- /.form-group -->
+                            <div class="form-group">
+                                <label>Lama Angsuran (bulan)</label>
+                                @Html.EditorFor(model => model.lama, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.lama, "", new { @class = "text-danger" })
+                            </div>
+                            <!-- /.form-group -->
+                            <!-- /.form-group -->
+                            <div class="form-group">
+                                <label>Keterangan</label>
+                                @Html.EditorFor(model => model.keterangan, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.keterangan, "", new { @class = "text-danger" })
+                            </div>
+
+                            <!-- /.form-group -->
+
+                            <div class="form-group">
+                                <div class="col-md-10">
+                                    <input type="submit" value="Ubah" class="btn btn-primary" />
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.box-body -->
+
+            </div>
+        <!-- /.box -->
+        }
+    </section>
+
+</div>
+
+@section Scripts
+{
+    <script type="text/javascript">
+            $(document).ready(function () {
+                //Date picker
+                $('#datepicker').datepicker({
+                    autoclose: true
+                })
+            })
+    </script>
+}
